@@ -1,0 +1,20 @@
+{
+  "name": "humhub/humhub-profiler",
+  "description": "HumHub profiler module",
+  "type": "library",
+  "require": {
+    "phpunit/php-timer": "^1.0.9"
+  },
+  "config": {
+    "process-timeout": 1800,
+    "platform": {
+      "php": "7.1"
+    }
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
+    }
+  ]
+}

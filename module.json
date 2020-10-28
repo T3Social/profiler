@@ -1,0 +1,11 @@
+{
+    "id": "profiler",
+    "name": "Profiler",
+    "description": "HumHub Profiler module.",
+    "keywords": [
+    ],
+    "version": "0.1",
+    "humhub": {
+        "minVersion": "1.5"
+    }
+}
