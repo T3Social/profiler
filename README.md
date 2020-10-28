@@ -14,19 +14,35 @@ You can furthermore use this module for profiling purposes.
 
 ### Users
 
-- First user with id 1 is always in admin group with name `root`
-- Other usernames are of format User<index>, so user with id 2 has username User1
-- All user passwords are `test`
+  - First user with id 1 is always in admin group with name `root`
+  - Other usernames are of format User<index>, so user with id 2 has username User1
+  - All user passwords are `test`
+  - By default 2000 Users will be created
 
 ### Spaces
 
  - Space names are random
+ - Users will be spread in steps of 100 through the first spaces
+ - By default 2000 Spaces will be created
  
 ### Content
 
  - This module will generate post and related content created activities
+ - The content is spread through the first few spaces and profile of user1
+ - By default 80000 content entries will be created (50/50 Activity/Post)
+
+### Following
+
+ - By default User 1 has 1000 followers
+ - By default the first few spaces
+ 
+### Friends
+
+ - By default User 1 has 1000 friends
 
 ### Generate fixture data
+
+**Generate all:**
 
 ```
 php yii profiler/fixture/generate-all
@@ -34,7 +50,17 @@ php yii profiler/fixture/generate-all
 
 ![](./docs/images/60d69b5d.png)
 
+**Generate specific fixture:**
+
+```
+php yii profiler/fixture/generate content/content
+```
+
 ### Load fixture data
+
+> ⚠ This will overwrite existing data in your database!
+
+**Load all:**
 
 ```
 php yii profiler/fixture/load "*"
@@ -42,23 +68,50 @@ php yii profiler/fixture/load "*"
 
 > Note: The execution of this command may take some time...
 
+**Load specific fixture:**
+
+```
+php yii profiler/fixture/load "Content"
+```
+
 ### Profiling
 
-Set `SET GLOBAL query_cache_size = 0;` in your mysql db in order to test against non cached query times.
+Its recommend to set `SET GLOBAL query_cache_size = 0;` in your test mysql db in order to test against 
+non cached query times.
 
 `SHOW VARIABLES LIKE 'query_cache_size';` should return a value of `0`.
 
 #### Run profiler
 
-```
-php yii profiler/gallery/run
-```
+**Run stream profiler with default run count:**
 
 ```
-php yii profiler/gallery/run --count=200
+php yii profiler/stream/run
+```
+
+**Set run count:**
+
+```
+php yii profiler/stream/run --count=200
 ```
 
 ## Further reading
 
  - https://github.com/yiisoft/yii2-faker/blob/master/docs/guide/basic-usage.md
  - https://github.com/fzaninotto/Faker#fakerproviderdatetime
+ 
+### Implement custom profiler
+
+```
+class MyProfilerController extends ProfileController
+{
+    public function actionRun()
+    {
+       $result = $this->runProfiler(function(ProfilerResult $result) {
+            // DO SOME WORK YOU WANT TO PROFILE
+        }, $this->title);
+
+        $this->printResult($result);
+    }
+}
+```
