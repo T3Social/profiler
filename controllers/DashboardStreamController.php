@@ -1,0 +1,59 @@
+<?php
+
+
+namespace humhub\modules\profiler\controllers;
+
+
+use humhub\modules\content\models\Content;
+use humhub\modules\dashboard\stream\DashboardStreamQuery;
+
+use humhub\modules\dashboard\stream\DeprecatedDashboardStreamQuery;
+use humhub\modules\profiler\models\ProfilerResult;
+
+class DashboardStreamController extends ProfileController
+{
+    public $count = 1000;
+
+    public $activity = 0;
+
+    public function options($actionID)
+    {
+        return array_merge(parent::options($actionID), [
+            'activity',
+        ]);
+    }
+
+    public function actionRunGuest()
+    {
+       $result = $this->runProfiler(function(ProfilerResult $result) {
+            $query = new DashboardStreamQuery(['activity' => (boolean) $this->activity]);
+            $result->setResult($query->all());
+        }, $this->title);
+
+        $competing = $this->runProfiler(function(ProfilerResult $result) {
+            $query = new DeprecatedDashboardStreamQuery(['activity' => (boolean) $this->activity]);
+            $result->setResult($query->all());
+        }, $this->title);
+
+        $result->setTotalCount('Content entries', Content::find()->count());
+
+        $this->printResult($result, $competing);
+    }
+
+    public function actionRunMember()
+    {
+        $result = $this->runProfiler(function(ProfilerResult $result) {
+            $query = new DashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $this->getAdminUser()]);
+            $result->setResult($query->all());
+        }, $this->title);
+
+        $competing = $this->runProfiler(function(ProfilerResult $result) {
+            $query = new DeprecatedDashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $this->getAdminUser()]);
+            $result->setResult($query->all());
+        }, $this->title);
+
+        $result->setTotalCount('Content entries', Content::find()->count());
+
+        $this->printResult($result, $competing);
+    }
+}

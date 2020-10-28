@@ -15,7 +15,7 @@ $id = $index + 1;
 
 $containerInfo = $faker->createContainer(Space::class, $id);
 
-$visibility = ($id === 1) ? 2 : $faker->numberBetween(0,1);
+$visibility = ($id === 1) ? Space::VISIBILITY_ALL : $faker->numberBetween(0,1);
 $joinPolicity = $visibility === 0 ? 0 : $faker->numberBetween(0,2);
 
 $status = $index && $index % 50 === 0 ? Space::STATUS_ARCHIVED : Space::STATUS_ENABLED;

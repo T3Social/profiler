@@ -14,7 +14,7 @@ $id = $index + 1;
 if($id % 2 !== 0) { // Space follow
     $user_id = $id;
     $object_model = Space::class;
-    $object_id = round($id / 100) + 2;
+    $object_id = ceil($id / 99) + 1;
 } else if($id % 4 === 0) { // User 1 follows other user
     $user_id = $id;
     $object_model = User::class;
