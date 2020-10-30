@@ -17,6 +17,8 @@ abstract class ProfileController extends Controller
 
     public $title;
 
+    public $userId = 1;
+
     public function init()
     {
         parent::init();
@@ -27,7 +29,8 @@ abstract class ProfileController extends Controller
     {
         return array_merge(parent::options($actionID), [
             'count',
-            'title'
+            'title',
+            'userId'
         ]);
     }
 
@@ -102,7 +105,7 @@ abstract class ProfileController extends Controller
     protected function printTotalTimeRow(ProfilerResult $result, ProfilerResult $competing = null)
     {
         if($competing) {
-            return $this->printCompetingResultRow('Total run time (s)', $result->timeTotal, $competing->timeTotal, true);
+            return $this->printCompetingResultRow('Total run time (s)', $result->timeTotal, $competing->timeTotal);
         }
         return $this->printResultRow('Total run time (s)', $result->timeTotal);
     }
@@ -149,7 +152,7 @@ abstract class ProfileController extends Controller
     {
         $format =  "%-50.50s|";
         $format .= $float ? "%3f" : "%u";
-        $format .= $float ? " / %3f" : " / %u";
+        $format .= $float ? " vs %3f" : " vs %u";
 
         if(!$diff) {
             $format .= " \n";
@@ -157,13 +160,13 @@ abstract class ProfileController extends Controller
             return;
         }
 
-        $sign = $value2 > $value1 ? '+' : '';
-        $format .= " | $sign%3f%%";
+        $sign = $value1 > $value2 ? '+' : '';
+        $format .= " = $sign%3f%%";
         $format .= " \n";
 
-        $diff = ($value2 - $value1) * 100 / $value2;
+        $diff = ($value1 - $value2) * 100 / $value2;
 
-        $this->stdout(sprintf($format, $title,$value1, $value2, $diff), $color);
+        $this->stdout(sprintf($format, $title, $value1, $value2, $diff), $color);
     }
 
     protected function printResultRow($title, $value, $float = true, $color = Console::FG_GREEN)
@@ -177,8 +180,8 @@ abstract class ProfileController extends Controller
     /**
      * @return User
      */
-    protected function getAdminUser()
+    protected function getUser()
     {
-        return User::findOne(['id' => 1]);
+        return User::findOne(['id' => $this->userId]);
     }
 }

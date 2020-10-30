@@ -22,7 +22,7 @@ if($id % 2 !== 0) { // Space follow
 } else { // Other user follows User 1
     $user_id = 1;
     $object_model = User::class;
-    $object_id = $user_id;
+    $object_id = $id;
 }
 
 return [

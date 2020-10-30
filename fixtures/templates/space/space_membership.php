@@ -6,9 +6,18 @@
  * @var $index integer
  */
 
+$spaceId =  $faker->memberSpace();
+
+if($index > 100 && $index < 200) {
+    $userId = 1;
+    $spaceId = $index;
+} else {
+    $userId = $index + 1;
+}
+
 return [
-    'space_id' => $faker->memberSpace(),
-    'user_id' => $index + 1,
+    'space_id' => $spaceId,
+    'user_id' => $userId,
     'originator_user_id' => null,
     'status' => 3,
     'request_message' => null,
