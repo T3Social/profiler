@@ -42,18 +42,41 @@ class DashboardStreamController extends ProfileController
 
     public function actionRunMember()
     {
-        $result = $this->runProfiler(function(ProfilerResult $result) {
-            $query = new DashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $this->getAdminUser()]);
+        $user = $this->getUser();
+
+        $result = $this->runProfiler(function(ProfilerResult $result) use ($user) {
+            $query = new DashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $user]);
             $result->setResult($query->all());
         }, $this->title);
 
-        $competing = $this->runProfiler(function(ProfilerResult $result) {
-            $query = new DeprecatedDashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $this->getAdminUser()]);
+       $competing = $this->runProfiler(function(ProfilerResult $result) use ($user) {
+            $query = new DeprecatedDashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $user]);
             $result->setResult($query->all());
         }, $this->title);
+
+
 
         $result->setTotalCount('Content entries', Content::find()->count());
 
         $this->printResult($result, $competing);
+    }
+
+    public function actionRunMemberDeprecated()
+    {
+        $user = $this->getUser();
+
+       /* $result = $this->runProfiler(function(ProfilerResult $result) use ($user) {
+            $query = new DashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $user]);
+            $result->setResult($query->all());
+        }, $this->title);*/
+
+         $competing = $this->runProfiler(function(ProfilerResult $result) use ($user) {
+             $query = new DeprecatedDashboardStreamQuery(['activity' => (boolean) $this->activity, 'user' => $user]);
+             $result->setResult($query->all());
+         }, $this->title);
+
+      //  $result->setTotalCount('Content entries', Content::find()->count());
+
+        $this->printResult($competing);
     }
 }

@@ -51,11 +51,16 @@ abstract class ProfileController extends Controller
      * @param null $count
      * @return ProfilerResult
      */
-    public function runProfiler($profiler, $title)
+    public function runProfiler($profiler, $title, $dryRun = true)
     {
-        $this->startProfiling();
-
         $result = new ProfilerResult(['title' => $title]);
+
+        if($dryRun) {
+            // We make a dry run in order to make sure no internal caches do not affect the result
+            call_user_func($profiler, $result, -1);
+        }
+
+        $this->startProfiling();
 
         for($i = 0; $i < $this->count;$i++) {
             call_user_func($profiler, $result, $i);
