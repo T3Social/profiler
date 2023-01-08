@@ -11,7 +11,7 @@ class ContentContainerProvider extends Base
 
     public static $index = 0;
 
-    public function createContainer($class, $id)
+    public static function createContainer($class, $id)
     {
         $result =  [
             'id' => ++static::$index,
