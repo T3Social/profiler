@@ -30,7 +30,6 @@ return [
     'join_policy' => $joinPolicity,
     'visibility' => $visibility,
     'status' => $status,
-    'tags' => null,
     'created_at' => $faker->dateTimeBetween('-2 years', '-1 years')->format('Y-m-d H:i:s'),
     'created_by' => 1,
     'updated_at' => $faker->dateTimeBetween('-1 years', '-1 months')->format('Y-m-d H:i:s'),
