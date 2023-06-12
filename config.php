@@ -5,5 +5,3 @@ return [
 	'class' => 'humhub\modules\profiler\Module',
 	'namespace' => 'humhub\modules\profiler',
 ];
-?>
-

@@ -62,7 +62,8 @@ class FixtureController extends FakerFixtureController
             'file/file' => 100,
             'content/contentcontainer' => function() {
                 return count(ContentContainerProvider::$container);
-            }
+            },
+            'user/group' => 1,
         ];
     }
 

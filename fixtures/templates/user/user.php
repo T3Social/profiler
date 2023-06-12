@@ -21,7 +21,6 @@ return [
     'email' => $faker->unique()->email,
     'contentcontainer_id' => $containerInfo['id'],
     'auth_mode' => 'local',
-    'tags' => null,
     'created_by' => null,
     'language' => 'en-US',
     'created_at' => $faker->dateTimeBetween('-2 years', '-1 years')->format('Y-m-d H:i:s'),

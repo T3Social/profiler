@@ -8,4 +8,3 @@ class Events extends BaseObject
 {
 
 }
-
