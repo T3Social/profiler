@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\profiler\controllers;
-
 
 use humhub\modules\gallery\models\StreamGallery;
 use humhub\modules\space\models\Space;
@@ -19,7 +17,7 @@ class GalleryController extends Controller
     public function options($actionID)
     {
         return array_merge(parent::options($actionID), [
-            'count'
+            'count',
         ]);
     }
 
@@ -32,7 +30,7 @@ class GalleryController extends Controller
     public function actionRun()
     {
 
-        if(!Yii::$app->getModule('gallery')) {
+        if (!Yii::$app->getModule('gallery')) {
             $this->stdout('Gallery Module needs to be enabled!', Console::FG_RED);
             return;
         }
@@ -43,17 +41,17 @@ class GalleryController extends Controller
 
         PHP_Timer::start();
 
-        for($i = 0; $i < $this->count;$i++) {
-           //$gallery->fileListQuery()->one();
-           $gallery->fileListQueryOld()->one();
-           // $this->stdout($query->createCommand()->rawSql,  Console::FG_GREEN);
+        for ($i = 0; $i < $this->count;$i++) {
+            //$gallery->fileListQuery()->one();
+            $gallery->fileListQueryOld()->one();
+            // $this->stdout($query->createCommand()->rawSql,  Console::FG_GREEN);
         }
 
         $timeTotal = PHP_Timer::stop();
 
         $timeAvg = $timeTotal / $this->count;
 
-        $this->printResultRow('getPreviewImageUrl('.$this->count.')', $timeTotal);
+        $this->printResultRow('getPreviewImageUrl(' . $this->count . ')', $timeTotal);
         $this->printResultRow('getPreviewImageUrl(avg)', $timeAvg);
         $this->stdout("\n");
         $this->printResourceUsage();
@@ -66,12 +64,12 @@ class GalleryController extends Controller
         $this->printResultRow('load (1m)', $load[0]);
         $this->printResultRow('load (5m)', $load[1]);
         $this->printResultRow('load (15m)', $load[2]);
-        $this->stdout(PHP_Timer::resourceUsage()."\n", Console::FG_GREEN);
+        $this->stdout(PHP_Timer::resourceUsage() . "\n", Console::FG_GREEN);
 
     }
 
     protected function printResultRow($title, $value, $color = Console::FG_GREEN)
     {
-        $this->stdout(sprintf("%-30.30s| %5f \n", $title,$value), $color);
+        $this->stdout(sprintf("%-30.30s| %5f \n", $title, $value), $color);
     }
 }

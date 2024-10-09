@@ -7,7 +7,7 @@
 
 use humhub\modules\post\models\Post;
 
-$date =  (new DateTime())->modify('- 1 year')->modify('+'.($index + 1).' minutes')->format('Y-m-d H:i:s');
+$date =  (new DateTime())->modify('- 1 year')->modify('+' . ($index + 1) . ' minutes')->format('Y-m-d H:i:s');
 $user = $faker->numberBetween(1, 100);
 
 return [

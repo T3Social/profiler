@@ -6,7 +6,7 @@
  */
 
 $id = $index + 1;
-$date =  (new DateTime())->modify('- 1 month')->modify('+'.($index + 1).' hours')->format('Y-m-d H:i:s');
+$date =  (new DateTime())->modify('- 1 month')->modify('+' . ($index + 1) . ' hours')->format('Y-m-d H:i:s');
 $author =  (int) $id % 100;
 
 return [

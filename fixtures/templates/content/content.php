@@ -48,11 +48,11 @@ try {
         'created_by' => $author,
         'updated_at' => $date,
         'updated_by' => $author,
-        'stream_channel' => $stream_channel
+        'stream_channel' => $stream_channel,
     ];
 } catch (\Throwable $t) {
     return [
         'id' => 1,
-        'guid' => $t->getMessage()
+        'guid' => $t->getMessage(),
     ];
 }

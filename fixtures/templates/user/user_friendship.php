@@ -11,7 +11,7 @@ use humhub\modules\user\models\User;
 
 $id = $index + 1;
 
-if($id % 2 === 0) {
+if ($id % 2 === 0) {
     $user_id = $id;
     $friend_user_id = 1;
     $object_id = round($id / 100) + 2;

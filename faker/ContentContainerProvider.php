@@ -17,8 +17,8 @@ class ContentContainerProvider extends Base
             'id' => ++static::$index,
             'class' => $class,
             'pk' => $id,
-            'guid' => (new \ReflectionClass($class))->getShortName().'::'.static::$index,
-            'owner_user_id' => ($class === Space::class) ? 1 : $id
+            'guid' => (new \ReflectionClass($class))->getShortName() . '::' . static::$index,
+            'owner_user_id' => ($class === Space::class) ? 1 : $id,
         ];
 
         static::$container[static::$index] = $result;
@@ -26,7 +26,8 @@ class ContentContainerProvider extends Base
         return $result;
     }
 
-    public function getContainer($index) {
+    public function getContainer($index)
+    {
         return static::$container[++$index];
     }
 }

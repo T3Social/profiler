@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\profiler\fixtures;
-
 
 use humhub\modules\activity\models\Activity;
 use yii\test\ActiveFixture;

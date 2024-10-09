@@ -13,5 +13,5 @@ return [
     'class' => ContentCreated::class,
     'module' => 'content',
     'object_model' => Post::class,
-    'object_id' => $index
+    'object_id' => $index,
 ];

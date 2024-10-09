@@ -14,5 +14,5 @@ return [
     'pk' => $container['pk'],
     'guid' => $container['guid'],
     'class' =>  $container['class'],
-    'owner_user_id' =>  $container['owner_user_id']
+    'owner_user_id' =>  $container['owner_user_id'],
 ];

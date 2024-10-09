@@ -14,5 +14,5 @@ return  [
     'created_at' =>  $faker->dateTimeBetween('-1 month', 'now')->format('Y-m-d H:i:s'),
     'created_by' => null,
     'updated_at' => null,
-    'updated_by' => null
+    'updated_by' => null,
 ];

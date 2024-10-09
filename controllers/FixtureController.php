@@ -1,8 +1,6 @@
 <?php
 
-
 namespace humhub\modules\profiler\controllers;
-
 
 use humhub\modules\profiler\faker\ContentContainerProvider;
 use humhub\modules\profiler\faker\SpaceMemberProvider;
@@ -43,7 +41,7 @@ class FixtureController extends FakerFixtureController
 
     public $providers = [
         ContentContainerProvider::class,
-        SpaceMemberProvider::class
+        SpaceMemberProvider::class,
     ];
 
     public function init()
@@ -60,7 +58,7 @@ class FixtureController extends FakerFixtureController
             'post/post' => 40000,
             'activity/activity' => 40000,
             'file/file' => 100,
-            'content/contentcontainer' => function() {
+            'content/contentcontainer' => function () {
                 return count(ContentContainerProvider::$container);
             },
             'user/group' => 1,
@@ -74,7 +72,7 @@ class FixtureController extends FakerFixtureController
     {
         parent::actionGenerateAll();
 
-        if(!empty(ContentContainerProvider::$container)) {
+        if (!empty(ContentContainerProvider::$container)) {
             $this->count = count(ContentContainerProvider::$container);
 
             $templatePath = Yii::getAlias($this->templatePath);
@@ -86,14 +84,14 @@ class FixtureController extends FakerFixtureController
 
     public function generateFixtureFile($templateName, $templatePath, $fixtureDataPath)
     {
-        if(isset(static::$templateCount[$templateName])) {
+        if (isset(static::$templateCount[$templateName])) {
             $this->count = (is_callable(static::$templateCount[$templateName]))
                 ? call_user_func(static::$templateCount[$templateName]) : static::$templateCount[$templateName];
         } else {
             $this->count = $this->defaultCount;
         }
 
-        $this->stdout($templateName.'('.$this->count.")\n", Console::FG_GREEN);
+        $this->stdout($templateName . '(' . $this->count . ")\n", Console::FG_GREEN);
         parent::generateFixtureFile($templateName, $templatePath, $fixtureDataPath);
     }
 
@@ -102,7 +100,7 @@ class FixtureController extends FakerFixtureController
     protected function findTemplatesFiles(array $templatesNames = [])
     {
         $result = parent::findTemplatesFiles($templatesNames);
-        $result = array_diff($result,$this->excludeTemplates);
+        $result = array_diff($result, $this->excludeTemplates);
         return $result;
     }
 

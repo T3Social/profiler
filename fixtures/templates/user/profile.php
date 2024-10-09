@@ -13,7 +13,5 @@ use humhub\modules\user\models\User;
 return [
     'user_id' => $index + 1,
     'firstname' => $faker->firstName,
-    'lastname' => $faker->lastName
+    'lastname' => $faker->lastName,
 ];
-
-
