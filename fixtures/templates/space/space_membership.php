@@ -8,7 +8,7 @@
 
 $spaceId =  $faker->memberSpace();
 
-if($index > 100 && $index < 200) {
+if ($index > 100 && $index < 200) {
     $userId = 1;
     $spaceId = $index;
 } else {
@@ -26,6 +26,5 @@ return [
     'created_at' => $faker->dateTimeBetween('-1 month', 'now')->format('Y-m-d H:i:s'),
     'created_by' => '1',
     'updated_at' => null,
-    'updated_by' => null
+    'updated_by' => null,
 ];
-

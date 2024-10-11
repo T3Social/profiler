@@ -12,11 +12,11 @@ class SpaceMemberProvider extends Base
     public static $index = 1;
 
     // We distribute equal amount of space members, some spaces may stay empty
-    const MAX_MEMBERS_PER_SPACE = 100;
+    public const MAX_MEMBERS_PER_SPACE = 100;
 
     public function memberSpace()
     {
-        if(!isset(static::$members[static::$index])) {
+        if (!isset(static::$members[static::$index])) {
             static::$members[static::$index] = 1;
         }
 

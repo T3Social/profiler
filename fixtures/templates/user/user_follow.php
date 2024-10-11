@@ -11,11 +11,11 @@ use humhub\modules\user\models\User;
 
 $id = $index + 1;
 
-if($id % 2 !== 0) { // Space follow
+if ($id % 2 !== 0) { // Space follow
     $user_id = $id;
     $object_model = Space::class;
     $object_id = ceil($id / 99) + 1;
-} else if($id % 4 === 0) { // User 1 follows other user
+} elseif ($id % 4 === 0) { // User 1 follows other user
     $user_id = $id;
     $object_model = User::class;
     $object_id = 1;
@@ -30,5 +30,5 @@ return [
     'object_model' => $object_model,
     'object_id' => $object_id,
     'user_id' => $user_id,
-    'send_notifications' => $faker->numberBetween(1,0)
+    'send_notifications' => $faker->numberBetween(1, 0),
 ];

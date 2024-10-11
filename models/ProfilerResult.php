@@ -28,11 +28,11 @@ class ProfilerResult extends Model
 
     public function getResultCount()
     {
-        if(is_int($this->result)) {
+        if (is_int($this->result)) {
             return $this->result;
         }
 
-        if(!is_array($this->result)) {
+        if (!is_array($this->result)) {
             return 0;
         }
 
